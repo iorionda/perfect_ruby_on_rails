@@ -1,4 +1,0 @@
-<% %w(foo bar baz).each do |name| %>
-  shoutTo<%= name.capitlize %> = ->
-    alert("Hi <%= name %>")
-<% end %>
