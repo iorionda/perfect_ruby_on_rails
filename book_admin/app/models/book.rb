@@ -1,5 +1,7 @@
 class Book < ActiveRecord::Base
   enum status: %w(reservatoin now_on_sale end_of_print)
+  # Hash 形式での定義
+  # enum status: { reservation: 0, now_on_sale: 1, end_of_print: 2 }
 
   scope :costly, -> { where("price > ?", 3000) }
   scope :written_about, ->(theme) { where("name like ?", "%#{theme}%") }
