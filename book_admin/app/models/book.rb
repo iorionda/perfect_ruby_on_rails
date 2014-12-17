@@ -17,17 +17,21 @@ class Book < ActiveRecord::Base
   end
 
   before_validation do |book|
-    book.name = book.name.gsub(/Cat/) do |matched|
+    book.name = self.name.gsub(/Cat/) do |matched|
       "lovely #{matched}"
     end
   end
 
   # あるいはこのようにも書ける
-  before_validation :add_lovely_to_cat
+  # before_validation :add_lovely_to_cat
 
-  def add_lovely_to_cat
-    book.name = book.name.gsub(/Cat/) do |matched|
-      "lovely #{matched}"
-    end
+  # def add_lovely_to_cat
+  #   book.name = book.name.gsub(/Cat/) do |matched|
+  #     "lovely #{matched}"
+  #   end
+  # end
+
+  after_destroy do |book|
+    Rails.logger.info "Book is deleted: #{book.attributes.inspect}"
   end
 end
